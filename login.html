@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="java.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VENOM Admin</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+        .admin-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        .login-box,
+        .admin-panel {
+            background: var(--card);
+            padding: 25px;
+            border-radius: 15px;
+        }
+        
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        
+        .red-btn {
+            background: var(--red);
+            color: white;
+        }
+        
+        .project-item {
+            background: #222;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <div id="loginBox" class="login-box">
+            <h2>Admin Login</h2>
+
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+
+            <button class="red-btn" onclick="login()">
+Login
+</button>
+        </div>
+
+        <div id="adminPanel" class="admin-panel hidden">
+
+            <h2>VENOM Dashboard</h2>
+
+            <input type="text" id="title" placeholder="Project Title">
+            <input type="text" id="image" placeholder="Thumbnail URL">
+            <input type="text" id="link" placeholder="Video Link">
+            <textarea id="description" placeholder="Project Description"></textarea>
+
+            <button class="red-btn" onclick="addProject()">
+Add Project
+</button>
+
+            <button onclick="logout()">
+Logout
+</button>
+
+            <hr>
+
+            <h3>Projects</h3>
+
+            <div id="projectsList"></div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const ADMIN_USER = "Ahmed Harfoush";
+        const ADMIN_PASS = "01203718994";
+
+        if (localStorage.getItem("adminLogged") === "true") {
+            document.getElementById("loginBox").classList.add("hidden");
+            document.getElementById("adminPanel").classList.remove("hidden");
+            loadProjects();
+        }
+
+        function login() {
+
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+
+            if (user === ADMIN_USER && pass === ADMIN_PASS) {
+
+                localStorage.setItem("adminLogged", "true");
+                location.reload();
+
+            } else {
+
+                alert("Wrong Credentials");
+
+            }
+
+        }
+
+        function logout() {
+
+            localStorage.removeItem("adminLogged");
+            location.reload();
+
+        }
+
+        function addProject() {
+
+            let projects =
+                JSON.parse(localStorage.getItem("projects")) || [];
+
+            const project = {
+
+                title: document.getElementById("title").value,
+                image: document.getElementById("image").value,
+                link: document.getElementById("link").value,
+                description: document.getElementById("description").value
+
+            };
+
+            projects.push(project);
+
+            localStorage.setItem(
+                "projects",
+                JSON.stringify(projects)
+            );
+
+            loadProjects();
+
+        }
+
+        function loadProjects() {
+
+            let projects =
+                JSON.parse(localStorage.getItem("projects")) || [];
+
+            const container =
+                document.getElementById("projectsList");
+
+            container.innerHTML = "";
+
+            projects.forEach((project, index) => {
+
+                container.innerHTML += `
+<div class="project-item">
+<h4>${project.title}</h4>
+<p>${project.description}</p>
+
+<button onclick="deleteProject(${index})">
+Delete
+</button>
+
+</div>
+`;
+
+            });
+
+        }
+
+        function deleteProject(index) {
+
+            let projects =
+                JSON.parse(localStorage.getItem("projects")) || [];
+
+            projects.splice(index, 1);
+
+            localStorage.setItem(
+                "projects",
+                JSON.stringify(projects)
+            );
+
+            loadProjects();
+
+        }
+    </script>
+    <div id="projectsContainer"></div>
+    <div id="emptyState"></div>
+    <div id="projectsContainer" class="projects-grid"></div>
+    <div id="emptyState"></div>
+    <div id="projectsContainer" class="projects-grid"></div>
+    <div id="emptyState" style="display:none;">No projects yet</div>
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="java.js"></script>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VENOM | Contact</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+        .contact-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+        
+        .contact-card {
+            width: 100%;
+            max-width: 800px;
+            background: var(--card);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .contact-card h1 {
+            color: var(--red);
+            margin-bottom: 10px;
+        }
+        
+        .contact-card p {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .contact-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .contact-item {
+            background: #1f1f1f;
+            padding: 20px;
+            border-radius: 15px;
+            transition: .3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-item h3 {
+            margin-bottom: 10px;
+            color: var(--red);
+        }
+        
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            word-break: break-word;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            background: var(--red);
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="contact-container">
+
+        <div class="contact-card">
+
+            <h1>Contact Me</h1>
+
+            <p>
+                Feel free to contact me for video editing, 3D modeling projects, collaborations, or freelance work.
+            </p>
+
+            <div class="contact-links">
+
+                <div class="contact-item">
+                    <h3>Facebook</h3>
+                    <a href="https://www.facebook.com/share/1P8EPds9oD/" target="_blank">
+Open Facebook
+</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Instagram</h3>
+                    <a href="https://www.instagram.com/_ahmed.fekry" target="_blank">
+Open Instagram
+</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/ahmed-harfoush-4821a5361" target="_blank">
+Open LinkedIn
+</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Email</h3>
+                    <a href="mailto:harfousha236@gmail.com">
+harfousha236@gmail.com
+</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>WhatsApp</h3>
+                    <a href="https://wa.me/201203718994" target="_blank">
+Chat on WhatsApp
+</a>
+                </div>
+
+            </div>
+
+            <a href="index.html" class="back-btn">
+Back To Portfolio
+</a>
+
+        </div>
+
+    </div>
+    <div id="projectsContainer"></div>
+    <div id="emptyState"></div>
+    <div id="projectsContainer" class="projects-grid"></div>
+    <div id="emptyState"></div>
+    <div id="projectsContainer" class="projects-grid"></div>
+    <div id="emptyState" style="display:none;">No projects yet</div>
+</body>
+
+</html>
